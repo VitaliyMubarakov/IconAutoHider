@@ -12,13 +12,19 @@ endif()
 project ("IconHider")
 
 # Add source to this project's executable.
-add_executable (IconHider "IconHider.cpp" "IconHider.h")
+add_executable (IconHider "IconHider.cpp" "IconHider.h" bt.rc)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET IconHider PROPERTY CXX_STANDARD 20)
 endif()
 
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
+# Копируем bat-файл в директорию билда после сборки
+add_custom_command(TARGET IconHider POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/IconHiderAddStartup.bat 
+                              $<TARGET_FILE_DIR:IconHider>
+)
 
 # set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O0")
 

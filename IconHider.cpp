@@ -28,8 +28,8 @@ void INIData() {
         timeToHide = std::stoi(parser.getValue("Section1", "timeToHide"));
         hideSpeedMs = std::stoi(parser.getValue("Section1", "hideSpeedMs"));
 
-        cout << timeToHide << endl;
-        cout << hideSpeedMs << endl;
+        cout << "timeToHide: " << timeToHide << endl;
+        cout << "hideSpeedMs: " << hideSpeedMs << endl;
 
         // Save modified data back to the INI file
         parser.saveToFile("settings.ini");
@@ -44,13 +44,17 @@ int main() {
     // Получаем дескриптор окна консоли
     HWND hWnd = GetConsoleWindow();
 
-    // Скрываем консольное окно
-    //ShowWindow(hWnd, SW_HIDE);
-    //ShowWindow(hWnd, SW_SHOW);
+#if defined _DEBUG
+    ShowWindow(hWnd, SW_SHOW);
+#else
+    ShowWindow(hWnd, SW_HIDE);
+#endif
 
     SetRussianLang();
 
     INIData();
+
+if (timeToHide == 1488) cout << "Вау" << endl;
 
     // Запускаем перечисление окон
     EnumWindows(EnumWindowsProc, 0);
@@ -76,7 +80,6 @@ int main() {
     desktopIconsGlobal = foundWindows[0];
 
     LONG_PTR currentStyle = GetWindowLongPtr(desktopIconsGlobal, GWL_EXSTYLE);
-cout << "def: " << currentStyle << endl;
     InitRect();
     if (!CheckSizeIsCorrect()) Show();
 
