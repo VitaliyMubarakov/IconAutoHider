@@ -16,5 +16,5 @@ In the future, I aim to add more customization options, such as automatic icon a
 
 ## Installation
 - Download and unpack the archive.
-- Run the .exe file.
-- You can run the startUp.bat file located in the installation folder. This will automatically configure the application to launch on startup every time you log into your system.
+- Run the IconHider.exe file.
+- You can run the IconHiderAddStartup.bat file. This will automatically configure the application to launch on startup every time you log into your system.
