@@ -159,38 +159,31 @@ void IniParser::saveToFile(const std::string& filename) const {
     }
 }
 
-// Метод для проверки существования файла
 bool fileExists(const std::string& filename) {
     std::ifstream file(filename);
-    return file.is_open();  // Возвращает true, если файл открыт успешно
+    return file.is_open();
 }
 
 void IniParser::createIniFile(const std::string& path) {
-    // Имя файла
     std::string filename = "settings.ini";
 
     if (fileExists(filename)) {
         std::cout << "Файл " << filename << " уже существует. Создание файла отменено." << std::endl;
         return;
     }
-    // Создаем объект ofstream для записи в файл
     std::ofstream outfile(filename);
 
-    // Проверяем, открылся ли файл
     if (!outfile) {
         std::cerr << "Ошибка при открытии файла!" << std::endl;
         return;
     }
 
-    // Записываем данные в формате INI
     outfile << "[Section1]\n";
-    outfile << "timeToHide=5\n";
+    outfile << "timeToHide=25\n";
     outfile << "hideSpeedMs=350\n";
 
-    // Закрываем файл
     outfile.close();
 
-    // Сообщаем пользователю о создании файла
     std::cout << "Файл " << filename << " был успешно создан и заполнен." << std::endl;
 }
 
